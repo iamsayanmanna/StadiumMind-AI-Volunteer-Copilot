@@ -1,0 +1,49 @@
+@theme {
+  /* Brand Color Palette - FIFA World Cup Theme */
+  --color-stadium-green-950: #02231a;
+  --color-stadium-green-900: #043e2e;
+  --color-stadium-green-800: #065f46;
+  --color-stadium-green-600: #059669;
+  --color-stadium-green-500: #10b981;
+
+  --color-energy-gold-600: #ca8a04;
+  --color-energy-gold-500: #eab308;
+  --color-energy-gold-400: #facc15;
+
+  --color-crowd-slate-950: #080c14;
+  --color-crowd-slate-900: #0f172a;
+  --color-crowd-slate-800: #1e293b;
+  --color-crowd-slate-700: #334155;
+  --color-crowd-slate-600: #475569;
+  --color-crowd-slate-400: #94a3b8;
+
+  --color-alert-red-600: #dc2626;
+  --color-alert-red-500: #ef4444;
+  --color-warning-orange-600: #ea580c;
+  --color-warning-orange-500: #f97316;
+  --color-safe-emerald-600: #059669;
+  --color-safe-emerald-500: #10b981;
+
+  /* Typography */
+  --font-display: 'Inter', 'Outfit', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Custom Spacing */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+
+  /* Radius Config */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  /* Custom Shadows */
+  --shadow-hud-glow: 0 0 15px rgba(16, 185, 129, 0.15);
+  --shadow-alert-glow: 0 0 20px rgba(239, 68, 68, 0.25);
+  --shadow-glass-inset: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+  --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,75 @@
+@theme {
+  /* Keyframes */
+  @keyframes alert-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+      filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.6));
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.02);
+      filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.9));
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes slide-up-fade {
+    from {
+      transform: translateY(12px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-in-right-fade {
+    from {
+      transform: translateX(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes shimmer-move {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Utility Animations mapped to tailwind config */
+  --animate-alert-pulse: alert-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-pulse-slow: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-slide-up: slide-up-fade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-in-right: slide-in-right-fade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-shimmer: shimmer-move 1.5s infinite linear;
+}
+
+/* Custom CSS-only animation utility classes */
+.shimmer-bg {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+}

@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+public
+package-lock.json
+.git
+.agents
+.gemini
+*.log
