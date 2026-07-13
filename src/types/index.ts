@@ -17,3 +17,5 @@ export interface CrowdIncidentReport {
   status: 'PENDING' | 'RESOLVING' | 'RESOLVED'
   timestamp: string
 }
+
+export * from './incident'
