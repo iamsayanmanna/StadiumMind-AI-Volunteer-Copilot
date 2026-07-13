@@ -1,71 +1,84 @@
 import React from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
+import {
+  AICopilotHero,
+  VolunteerProfileCard,
+  CurrentAssignmentCard,
+  CrowdStatusCard,
+  QuickActions,
+  NotificationsCard,
+} from '@/components/dashboard'
+import {
+  MOCK_COPILOT_GUIDANCE,
+  MOCK_ASSIGNMENT,
+  MOCK_GATE_METRICS,
+  MOCK_NOTIFICATIONS,
+} from '@/constants/mockDashboard'
 
 /**
- * Volunteer Dashboard placeholder.
- * Accessible only by authenticated volunteers.
+ * Volunteer Operations Dashboard console.
+ * Displays real-time tactical crowd assessments, assignment controls, and AI guidance feeds.
  */
 const Dashboard: React.FC = () => {
   useDocumentTitle('Volunteer Dashboard')
   const { user } = useAuth()
 
+  // Fallback profile if user is not fully loaded
+  const profile = user || {
+    uid: 'mock-vol-104',
+    name: 'Lusail Gate Marshal',
+    role: 'volunteer',
+    assignedSector: 'Lusail Sector C - Gate D',
+    languages: ['English', 'Arabic', 'French'],
+  }
+
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6 animate-slide-up">
-      <div className="glass-panel p-8 rounded-2xl hud-border-green relative overflow-hidden">
-        {/* Glow background rings */}
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-stadium-green-600/10 rounded-full blur-2xl pointer-events-none"></div>
-        <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-energy-gold-600/5 rounded-full blur-2xl pointer-events-none"></div>
+    <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-6">
+      {/* Console Top Header area */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-white/5 pb-4 gap-4">
+        <div>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-100 flex items-center gap-2">
+            <span>StadiumMind Operations HUD</span>
+            <span className="text-[10px] bg-stadium-green-950 text-stadium-green-400 border border-stadium-green-800 px-2 py-0.5 rounded font-mono uppercase tracking-widest font-bold">
+              Lusail Center
+            </span>
+          </h2>
+          <p className="text-xs text-crowd-slate-400 mt-1">
+            Real-time AI-powered tactical console for tournament marshals.
+          </p>
+        </div>
+        <div className="text-right text-xs font-mono text-crowd-slate-450 hidden md:block">
+          <div>SYS STATUS: ACTIVE</div>
+          <div>LUSAIL LOC: 25.4208° N, 51.4908° E</div>
+        </div>
+      </div>
 
-        <h2 className="text-2xl font-bold text-slate-100 mb-2">
-          Welcome Back, {user?.name || 'Marshal'}
-        </h2>
-        <p className="text-sm text-crowd-slate-400 leading-relaxed mb-6">
-          Your marshaling session is active for the sector:{' '}
-          <strong className="text-slate-200">{user?.assignedSector}</strong>. Use this copilot to
-          track gate congestion logs and access translation assists.
-        </p>
+      {/* Main Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Column 1: AI Hero and Active Task (Span 7 on large screen) */}
+        <div className="lg:col-span-7 space-y-6">
+          <AICopilotHero guidance={MOCK_COPILOT_GUIDANCE} />
+          <CurrentAssignmentCard assignment={MOCK_ASSIGNMENT} />
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="glass-panel-light p-4 rounded-xl">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-stadium-green-500 mb-1">
-              Active Integration Services
-            </h3>
-            <ul className="text-xs space-y-1.5 text-slate-350">
-              <li className="flex items-center">
-                <span className="w-1.5 h-1.5 rounded-full bg-stadium-green-500 mr-2"></span>
-                Firebase Client App (Initialized)
-              </li>
-              <li className="flex items-center">
-                <span className="w-1.5 h-1.5 rounded-full bg-stadium-green-500 mr-2"></span>
-                Google GenAI SDK (Initialized client)
-              </li>
-              <li className="flex items-center">
-                <span className="w-1.5 h-1.5 rounded-full bg-stadium-green-500 mr-2"></span>
-                Tailwind CSS v4 (Compiling CSS-first directives)
-              </li>
-            </ul>
-          </div>
+        {/* Column 2: Crowd Status & Quick Actions (Span 5 on large screen) */}
+        <div className="lg:col-span-5 space-y-6">
+          <CrowdStatusCard metrics={MOCK_GATE_METRICS} />
+          <QuickActions />
+        </div>
+      </div>
 
-          <div className="glass-panel-light p-4 rounded-xl">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-energy-gold-400 mb-1">
-              Next Milestones (Roadmap)
-            </h3>
-            <ul className="text-xs space-y-1.5 text-slate-350">
-              <li className="flex items-center">
-                <span className="w-1.5 h-1.5 rounded-full bg-energy-gold-500 mr-2"></span>
-                Setup Firestore & Crowd Report collections
-              </li>
-              <li className="flex items-center">
-                <span className="w-1.5 h-1.5 rounded-full bg-energy-gold-500 mr-2"></span>
-                Implement Gemini Crowd Density agent prompts
-              </li>
-              <li className="flex items-center">
-                <span className="w-1.5 h-1.5 rounded-full bg-energy-gold-500 mr-2"></span>
-                Implement translation & multilingual hooks
-              </li>
-            </ul>
-          </div>
+      {/* Grid Layout Row 2: Profile & Operational Alerts */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+        {/* Profile Card (Span 5 on large screen) */}
+        <div className="lg:col-span-5">
+          <VolunteerProfileCard profile={profile} />
+        </div>
+
+        {/* Alerts Card (Span 7 on large screen) */}
+        <div className="lg:col-span-7">
+          <NotificationsCard notifications={MOCK_NOTIFICATIONS} />
         </div>
       </div>
     </div>
