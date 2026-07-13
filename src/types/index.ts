@@ -19,3 +19,5 @@ export interface CrowdIncidentReport {
 }
 
 export * from './incident'
+export * from './navigation'
+export * from './communication'
