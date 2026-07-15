@@ -26,6 +26,7 @@ import {
   VoiceAssistantCard,
   BroadcastCenter,
   QuickResponsePanel,
+  KnowledgeDirectory,
 } from '@/components/dashboard'
 import {
   MOCK_COPILOT_GUIDANCE,
@@ -55,7 +56,7 @@ import { navigationService, navigationAnalyzer } from '@/services/navigation'
 import { communicationService } from '@/services/communication'
 import { MOCK_VOLUNTEER_LOCATION, MOCK_DESTINATIONS } from '@/constants/mockNavigation'
 import { SUPPORTED_LANGUAGES, MOCK_QUICK_RESPONSES } from '@/constants/mockCommunication'
-import { Radio, Layers, Compass, MessageSquare } from 'lucide-react'
+import { Radio, Layers, Compass, MessageSquare, Info } from 'lucide-react'
 
 /**
  * Volunteer Operations Dashboard console.
@@ -68,7 +69,7 @@ const Dashboard: React.FC = () => {
   const { showToast } = useToast()
 
   const [activeTab, setActiveTab] = useState<
-    'operations' | 'incidents' | 'navigation' | 'communication'
+    'operations' | 'incidents' | 'navigation' | 'communication' | 'info'
   >('operations')
 
   // Incident Module States
@@ -440,6 +441,17 @@ const Dashboard: React.FC = () => {
             <MessageSquare className="w-3.5 h-3.5" />
             Communication
           </button>
+          <button
+            onClick={() => setActiveTab('info')}
+            className={`flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 ${
+              activeTab === 'info'
+                ? 'bg-stadium-green-600 text-white shadow-md'
+                : 'text-crowd-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Info className="w-3.5 h-3.5" />
+            Info Directory
+          </button>
         </div>
       </div>
 
@@ -565,7 +577,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
-      ) : (
+      ) : activeTab === 'communication' ? (
         <div className="space-y-6 animate-slide-up">
           {/* Communication Workspace Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -585,6 +597,10 @@ const Dashboard: React.FC = () => {
             <BroadcastCenter broadcasts={broadcasts} onSendBroadcast={handleSendBroadcast} />
             <QuickResponsePanel templates={quickResponses} onSelect={handleQuickResponseSelect} />
           </div>
+        </div>
+      ) : (
+        <div className="space-y-6 animate-slide-up">
+          <KnowledgeDirectory />
         </div>
       )}
     </div>
